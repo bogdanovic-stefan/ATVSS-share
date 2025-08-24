@@ -17,7 +17,7 @@
 ## Korak 2: Konfiguracija backend-a
 
 Proverite da li su podaci za konekciju ispravni:
-   ```
+   ```py
     'host': 'localhost_ili_drugo_ime',
     'port': vas_port (3306),
     'user': 'ime_usera',
