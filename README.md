@@ -18,11 +18,12 @@
 
 Proverite da li su podaci za konekciju ispravni:
    ```
-    host='localhost',
-    port='3306',
-    user='root',
-    passwd='',
-    database='evidencija_studenata'
+    'host': 'localhost_ili_drugo_ime',
+    'port': vas_port (3306),
+    'user': 'ime_usera',
+    'password': 'vasa_lozinka',
+    'database': 'room_share',
+    'charset': 'utf8mb4'
 
    ```
 
