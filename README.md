@@ -16,54 +16,42 @@
 
 ## Korak 2: Konfiguracija backend-a
 
-1. Otvorite `backend/config.env`
-2. Proverite da li su podaci za konekciju ispravni:
+Proverite da li su podaci za konekciju ispravni:
    ```
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_USER=root
-   DB_PASSWORD=vaša_lozinka
-   DB_NAME=room_share
-   JWT_SECRET_KEY=vas_jwt_kljuc_123
-   FLASK_SECRET_KEY=vas_flask_kljuc_456
+    host='localhost',
+    port='3306',
+    user='root',
+    passwd='',
+    database='evidencija_studenata'
+
    ```
 
 ## Korak 3: Instalacija backend-a
 
-```bash
+CMD:
 cd backend
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
-```
 
 ## Korak 4: Instalacija frontend-a
 
-```bash
+CMD:
 cd frontend
 npm install
-```
 
 ## Korak 5: Pokretanje aplikacije
 
-### Opcija 1: Automatsko pokretanje (Windows)
-```bash
-start.bat
-```
-
-### Opcija 2: Ručno pokretanje
 
 **Terminal 1 - Backend:**
-```bash
+CMD:
 cd backend
 python app.py
-```
 
 **Terminal 2 - Frontend:**
-```bash
+CMD:
 cd frontend
-npm run serve
-```
+npm run dev
 
 ## Pristup aplikaciji
 
@@ -79,20 +67,21 @@ npm run serve
 
 ## Dodavanje profesora
 
-Profesori se dodaju direktno u bazu podataka:
+Profesori se tako sto se prvo registruje kao student i onda se preko sql u bazi promeni rola sa "student" na "profesor"
 
 ```sql
-INSERT INTO korisnici (ime, prezime, email, lozinka_hash, rola) 
-VALUES ('Ime', 'Prezime', 'profesor@fakultet.com', 'hash_lozinke', 'profesor');
+UPDATE korisnici 
+SET rola = 'profesor', 
+    smer = NULL, 
+    broj_indeksa = NULL 
+WHERE email = 'markomarkovic@gmail.com';
 ```
-
-Za hash-ovanje lozinke koristite bcrypt sa salt-om.
 
 ## Rešavanje problema
 
 ### Problem sa konekcijom na bazu
 - Proverite da li MySQL server radi
-- Proverite port (3307)
+- Proverite port
 - Proverite korisničko ime i lozinku
 
 ### Problem sa CORS
@@ -110,7 +99,6 @@ room-share/
 ├── backend/
 │   ├── app.py              # Flask aplikacija
 │   ├── requirements.txt    # Python zavisnosti
-│   ├── config.env         # Konfiguracija
 │   └── uploads/           # Upload-ovani fajlovi
 ├── frontend/
 │   ├── src/
